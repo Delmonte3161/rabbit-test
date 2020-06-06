@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    stream:
+      default:
+        contentType: application/json
+      function.definition: receive
+      function:
+        bindings:
+          receive-in-0: rabbit-test-input
+      bindings:
+        rabbit-test-input:
+          destination: rabbit-test-input
+          group: rabbit-test
+      rabbit:
+        bindings:
+          rabbit-test-input:
+            consumer:
+              auto-bind-dlq: true
+              acknowledge-mode: MANUAL
+              prefetch: 5
+
